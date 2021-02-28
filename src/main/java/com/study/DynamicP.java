@@ -6,7 +6,7 @@ package com.study;
  * @description: 动态规划
  * @date 2021/2/20 18:59
  */
-public class Dynamic {
+public class DynamicP {
 
 
     // 回溯算法实现。注意：我把输入的变量都定义成了成员变量。
