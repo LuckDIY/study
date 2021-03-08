@@ -1,8 +1,6 @@
 package com.study.tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 二叉树相关算法题
@@ -26,7 +24,7 @@ public class Solution {
     }
 
     /**
-     * 中序遍历
+     * 中序遍历通过方法栈
      * @param root
      * @return
      */
@@ -44,6 +42,55 @@ public class Solution {
         list.addAll(right);
         return list;
 
+    }
+
+    /**
+     * 中序遍历通过栈直接实现
+     * @param root
+     * @return
+     */
+    public static List<Integer> inorderTraversal1(TreeNode root){
+        ArrayList<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root==null){
+            return result;
+        }
+        TreeNode header = root;
+
+        //依次弹出
+        while(header!=null||!stack.isEmpty()){
+            //将左节点全部入栈
+            while(header!=null){
+                stack.push(header);
+                header=header.left;
+            }
+
+            header = stack.pop();
+            result.add(header.val);
+            header = header.right;
+        }
+        return result;
+
+    }
+
+    /**
+     * 官方实现，通过迭代
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        Deque<TreeNode> stk = new LinkedList<TreeNode>();
+        while (root != null || !stk.isEmpty()) {
+            while (root != null) {
+                stk.push(root);
+                root = root.left;
+            }
+            root = stk.pop();
+            res.add(root.val);
+            root = root.right;
+        }
+        return res;
     }
 
     /**
@@ -206,22 +253,85 @@ public class Solution {
         return maxNode;
     }
 
+
+    /**
+     * 652. 寻找重复的子树
+     * 给定一棵二叉树，返回所有重复的子树。对于同一类的重复子树，你只需要返回其中任意一棵的根结点即可。
+     *
+     * 两棵树重复是指它们具有相同的结构以及相同的结点值。
+     * @param root
+     * @return
+     */
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+
+        Map<String, Integer> map = new HashMap<>();
+        List<TreeNode> result = new ArrayList<>();
+
+        findDuplicateSubtrees(map,result,root);
+
+        System.out.println(map);
+        return result;
+    }
+
+    public String  findDuplicateSubtrees(Map<String, Integer> map,List<TreeNode> result,TreeNode root) {
+        //深度优先,中序遍历，存入集合
+        if(root==null){
+            return "#";
+        }
+
+        String leftStr = findDuplicateSubtrees(map, result, root.left);
+
+        String rightStr = findDuplicateSubtrees(map, result, root.right);
+
+        String str = root.val+","+leftStr+","+rightStr;
+
+        map.put(str,map.getOrDefault(str, 0) + 1);
+
+        if(map.get(str)==2){
+            result.add(root);
+        }
+        return str;
+    }
+
+
+    /**
+     * 230. 二叉搜索树中第K小的元素
+     * 给定一个二叉搜索树的根节点 root ，和一个整数 k ，请你设计一个算法查找其中第 k 个最小元素（从 1 开始计数）。
+     *
+     * 中序遍历将数据存入list，取k-1的值
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthSmallest(TreeNode root, int k) {
+
+        List<Integer> list = inorderTraversal(root);
+        return list.get(k-1);
+    }
+
+
+
+
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
+        TreeNode root = new TreeNode(3);
         TreeNode left1 = new TreeNode(2);
         TreeNode right1 = new TreeNode(5);
-        TreeNode left1left = new TreeNode(3);
+        TreeNode left1left = new TreeNode(1);
         TreeNode left1right = new TreeNode(4);
         TreeNode right1right = new TreeNode(6);
         root.left=left1;
         root.right=right1;
         left1.left=left1left;
-        left1.right=left1right;
+        right1.left=left1right;
         right1.right=right1right;
 
-        flatten(root);
-        System.out.println(beforeTraversal(root));
+
+        inorderTraversal1(root);
 
     }
+
+
+
+
 
 }
