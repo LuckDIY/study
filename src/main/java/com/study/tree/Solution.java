@@ -330,6 +330,19 @@ public class Solution {
 
     }
 
+    /**
+     * 剑指 Offer 55 - I. 二叉树的深度
+     * 通过深度优先下探获取深度
+     * root的深度 = max(root.left的深度,root.right的深度) + 1
+     * 递归终止条件 root==null return 0;
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if(root==null) return 0;
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
+
 
 
 
