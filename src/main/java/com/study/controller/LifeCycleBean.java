@@ -5,6 +5,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,20 +15,15 @@ import org.springframework.stereotype.Component;
  * @date 2021/1/4 17:33
  */
 @Component
-public class LifeCycleBean implements BeanNameAware, BeanFactoryAware {
+public class LifeCycleBean implements BeanPostProcessor {
 
 
     @Autowired
     private Ab ab;
 
-
     @Override
-    public void setBeanName(String name) {
-        System.out.println("lifeCycle implements BeanNameAware setBeanName=" + name);
-    }
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("lifeCycle implements BeanFactoryAware setBeanFactory="+ beanFactory);
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("beanPostProcessor class de method"+beanName);
+        return null;
     }
 }
