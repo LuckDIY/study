@@ -312,7 +312,7 @@ public class Solution {
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         TreeNode root = new TreeNode(3);
         TreeNode left1 = new TreeNode(2);
         TreeNode right1 = new TreeNode(5);
@@ -328,7 +328,7 @@ public class Solution {
 
         inorderTraversal1(root);
 
-    }
+    }*/
 
     /**
      * 剑指 Offer 55 - I. 二叉树的深度
@@ -341,6 +341,42 @@ public class Solution {
     public int maxDepth(TreeNode root) {
         if(root==null) return 0;
         return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
+
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{-10,-3,0,5,9};
+        TreeNode treeNode = new Solution().sortedArrayToBST(nums);
+    }
+
+    /**
+     *
+     * 面试题 04.02. 最小高度树
+     * 递归，分治
+     * @param nums
+     * @return
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+
+        return processor(nums,0,nums.length-1);
+
+    }
+
+    public TreeNode processor(int[] nums,int start,int end){
+        if(start>end){
+            return null;
+        }
+
+        //nums是有序数组
+        int n = (end-start) / 2;
+        TreeNode root = new TreeNode(nums[n+start]);
+
+        //左边一半
+        root.left=processor(nums,start,start+n-1);
+        //右边一半
+        root.right=processor(nums,start+n+1,end);
+
+        return root;
     }
 
 

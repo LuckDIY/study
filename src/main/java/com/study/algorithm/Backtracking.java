@@ -150,4 +150,31 @@ public class Backtracking {
         return 2;
     }
 
+
+
+    public List<String> printVertically(String s) {
+        ArrayList<String> result = new ArrayList<>();
+        String[] s1 = s.split(" ");
+        int maxSize = 0;
+        for (String s2 : s1) {
+            maxSize = maxSize<s2.length()? s2.length() : maxSize;
+        }
+        for (int i = 0; i < maxSize; i++) {
+            String child = "";
+            boolean b = false;
+            for (int i1 = s1.length - 1; i1 >= 0; i1--) {
+                String s2=s1[i1];
+                if(s2.length()>i){
+                    child=s2.charAt(i)+child;
+                    b=true;
+                }else{
+                    if(b){
+                        child=" "+child;
+                    }
+                }
+            }
+            result.add(child);
+        }
+        return result;
+    }
 }
