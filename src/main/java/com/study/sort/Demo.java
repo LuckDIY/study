@@ -14,6 +14,7 @@ public class Demo {
     public static void main(String[] args) {
         int[] arr = new int[]{4,3,5,6,2,7,1,1,2,2};
         new Demo().sort(arr);
+
     }
 
     /**

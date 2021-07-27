@@ -1,11 +1,14 @@
 package com.study.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @Service
+@Slf4j
 public class Ab {
 
     String a;
@@ -51,6 +54,13 @@ public class Ab {
 
 
 
+    }
+
+
+    @Cacheable("test")
+    public String equals1(String name) {
+        log.info("进入方法"+name);
+        return "helloword";
     }
 
 

@@ -24,6 +24,7 @@ public class LifeCycleBean implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("beanPostProcessor class de method"+beanName);
-        return null;
+        System.out.println("bean class"+bean.getClass());
+        return bean;
     }
 }

@@ -1,4 +1,4 @@
-package com.study;
+package com.study.dp;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -117,8 +117,10 @@ public class DynamicP {
 
     public static void main(String[] args) {
         //System.out.println(lengthOfLongestSubstring2("aab"));
-        int[] a = new int[]{-2,1,-3,4,-1,2,1,-5,4};
-        System.out.println(maxSubArray(a));
+//        int[] a = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+//        System.out.println(maxSubArray(a));
+
+
     }
 
 
@@ -313,7 +315,94 @@ public class DynamicP {
         //最后一天不持有的最大收益
         return dp[prices.length-1][0];
 
+    }
+
+    /**
+     * 面试题 16.17. 连续数列
+     * @param nums
+     * @return
+     */
+    public int maxSubArray2(int[] nums) {
+
+        //以i结尾的最大连续数和
+        int[] dp = new int[nums.length];
+        int max = nums[0];
+        dp[0]=nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int sum;
+            if(dp[i-1]>0){
+                sum = dp[i-1]+nums[i];
+            }else{
+                sum = nums[i];
+            }
+            max = Math.max(sum,max);
+            dp[i] = sum;
+        }
+        return max;
+    }
+
+
+    /**
+     * 面试题 08.01. 三步问题
+     * 爬楼梯
+     * @param n
+     * @return
+     */
+    public int waysToStep(int n) {
+        if(n<3){
+            return n;
+        }
+        if(n==3){
+            return 4;
+        }
+
+        long[] dp = new long[n+1];
+        dp[1]=1;
+        dp[2]=2;
+        dp[3]=4;
+        for (int i = 4; i < dp.length; i++) {
+            dp[i]=dp[i-1]+dp[i-2]+dp[i-3]%1000000007;
+        }
+        return (int)dp[n];
 
 
     }
+
+
+    /**
+     * 1884. 鸡蛋掉落-两枚鸡蛋
+     * @param n
+     * @return
+     */
+    public int twoEggDrop(int n) {
+      return 0;
+    }
+
+
+    /**
+     * 746. 使用最小花费爬楼梯
+     * dp[i] = min(dp[i-1],dp[i-2])+cost[i];
+     * @param cost
+     * @return
+     */
+    public int minCostClimbingStairs(int[] cost) {
+
+        //到达i位置的最少花费为dp[i]
+        int[] dp = new int[cost.length+1];
+        dp[0]=cost[0];
+        dp[1]=cost[1];
+
+        for (int i = 2; i < cost.length+1; i++) {
+            if(i!=cost.length){
+                dp[i]= Math.min(dp[i-1],dp[i-2])+cost[i];
+            }else{
+                dp[i]= Math.min(dp[i-1],dp[i-2]);
+            }
+
+        }
+        return dp[cost.length];
+    }
+
+
+
 }

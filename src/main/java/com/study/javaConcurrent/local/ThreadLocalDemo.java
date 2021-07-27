@@ -1,6 +1,5 @@
 package com.study.javaConcurrent.local;
 
-import org.apache.commons.logging.Log;
 
 public class ThreadLocalDemo {
 
