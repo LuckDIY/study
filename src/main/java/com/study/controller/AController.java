@@ -2,6 +2,7 @@ package com.study.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.study.aop.WriteLog;
+import com.study.generatorMybatis.mapper.UserInfoMapper;
 import com.sun.org.apache.bcel.internal.generic.INEG;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,31 +30,22 @@ public class AController {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
+
     @Autowired
     private Ab ab;
 
 
     //@WriteLog
     @GetMapping("ok")
-    public String get(Person person, HttpServletRequest request){
+    public Object get(Person person, HttpServletRequest request){
 
         log.info("进入方法");
-        Object user = request.getSession().getAttribute("user");
-        System.out.println(JSON.toJSONString(user));
-        if(user==null){
-            request.getSession().setAttribute("user","123");
-        }
-        AController bean = context.getBean(getClass());
-        System.out.println(JSON.toJSONString(bean));
-        System.out.println(ab.a);
-        //int i = 1/0;
 
-        String name = redisTemplate.opsForValue().get("name");
-        log.info("redis key name:{}",name);
-        String s = ab.equals1(person.name);
-
-
-        return s;
+        return userInfoMapper.selectAll();
     }
 
 

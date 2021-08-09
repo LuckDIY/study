@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.generatorMybatis.mapper.SubContentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.study.generatorMybatis.entity.SubContentInfo">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="father_id" jdbcType="BIGINT" property="fatherId" />
+    <result column="main_id" jdbcType="BIGINT" property="mainId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <insert id="insert" parameterType="com.study.generatorMybatis.entity.SubContentInfo">
+    insert into sub_content_info (id, user_id, father_id, 
+      main_id, content)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{fatherId,jdbcType=BIGINT}, 
+      #{mainId,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, father_id, main_id, content
+    from sub_content_info
+  </select>
+</mapper>

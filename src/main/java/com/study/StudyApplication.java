@@ -29,4 +29,5 @@ public class StudyApplication {
         return new RestTemplate();
     }
 
+
 }
