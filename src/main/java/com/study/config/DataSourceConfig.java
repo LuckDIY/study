@@ -1,21 +1,16 @@
 package com.study.config;
 
-import com.zaxxer.hikari.HikariDataSource;
+import com.alibaba.druid.pool.DruidDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.quartz.QuartzDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.util.Properties;
 
 /**
  * 数据库配置
@@ -53,7 +48,7 @@ public class DataSourceConfig {
     @Bean(name = DATASOURCE_NAME)
     @ConfigurationProperties(prefix = BUSINESS_DATASOURCE_PREFIX)
     public DataSource druidDataSource() {
-        return new HikariDataSource();
+        return new DruidDataSource();
     }
 
     /**
@@ -71,11 +66,11 @@ public class DataSourceConfig {
     /**
      * @QuartzDataSource 注解则是配置Quartz独立数据源的配置
      */
-    @Bean
-    @QuartzDataSource 
+    /*@Bean
+    @QuartzDataSource
     @ConfigurationProperties(prefix = QUARTZ_DATASOURCE_PREFIX)
     public DataSource quartzDataSource(){
-        return new HikariDataSource();
-    }
+        return new DruidDataSource();
+    }*/
 }
 

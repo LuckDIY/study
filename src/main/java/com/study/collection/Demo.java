@@ -1,8 +1,10 @@
 package com.study.collection;
 
 import com.alibaba.fastjson.JSON;
+import org.yaml.snakeyaml.Yaml;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @program: study
@@ -26,6 +28,25 @@ public class Demo {
             i++;
         }
         System.out.println(i);
+
+
+
+
+
+        ArrayList<Map> jsonStr = new ArrayList();
+
+        String yamlStr = null;
+
+        for (int j = 0; j < jsonStr.size(); j++) {
+
+            Map o = jsonStr.get(j);
+            String str = new Yaml().dumpAsMap(o);
+            if(j!=0){
+                yamlStr+="---"+str;
+            }else{
+                yamlStr+=str;
+            }
+        }
     }
 
 }

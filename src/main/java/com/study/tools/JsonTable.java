@@ -17,19 +17,26 @@ public class JsonTable {
     public static void main(String[] args) {
         //Scanner scanner = new Scanner(System.in);
         String str = "{\n" +
-                "            \"createTime\": \"2021-05-13 16:28:32\",\n" +
-                "            \"createUser\": \"\",\n" +
-                "            \"discountGoodsSkuId\": 3,\n" +
-                "            \"discountPrice\": 700,\n" +
-                "            \"goodsDiscount\": 1.00000000,\n" +
-                "            \"goodsSkuName\": \"颜色分类:B款猴配盒子链  \",\n" +
-                "            \"id\": 1,\n" +
-                "            \"sessionGoodsId\": 2,\n" +
-                "            \"skuCode\": \"636725587871797248\",\n" +
-                "            \"skuPrice\": 700,\n" +
-                "            \"status\": false,\n" +
-                "            \"updateTime\": \"2021-05-13 16:36:14\",\n" +
-                "            \"updateUser\": \"\"\n" +
+                "            \"categoryName\": \"\",\n" +
+                "            \"goodsCategoryName\": \"美容个护-洗护\",\n" +
+                "            \"goodsCode\": \"1021\",\n" +
+                "            \"goodsImages\": \"http://img.xiaoxiangyoupin.com/image/8527b226-e259-4be4-a3bc-bb74de55a36c.png\",\n" +
+                "            \"goodsName\": \"【博朗】欧乐3D蓝牙智能电动牙刷\",\n" +
+                "            \"goodsOrder\": \"\",\n" +
+                "            \"goodsType\": 2,\n" +
+                "            \"id\": 352,\n" +
+                "            \"inventory\": \"\",\n" +
+                "            \"originalPrice\": 139900,\n" +
+                "            \"plusNewConfig\": \"\",\n" +
+                "            \"supplyPrice\": \"\",\n" +
+                "            \"updateTime\": \"2021-08-23 18:43:39\",\n" +
+                "            \"updateUser\": \"admin\",\n" +
+                "            \"vipShopConfig\": {\n" +
+                "                \"discountPrice\": 1279200,\n" +
+                "                \"goodsDiscount\": 8.00000000,\n" +
+                "                \"status\": true\n" +
+                "            },\n" +
+                "            \"xxypOriginalPrice\": 249900\n" +
                 "        }";
         StringBuilder builder = new StringBuilder();
         builder.append("| 名称                  | 类型    | 描述                      |").append("\r\n");
