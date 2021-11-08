@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.generatorMybatis.mapper.ThemeMapper">
+  <resultMap id="BaseResultMap" type="com.study.generatorMybatis.entity.Theme">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tribe_id" jdbcType="BIGINT" property="tribeId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="titile" jdbcType="VARCHAR" property="titile" />
+    <result column="praise" jdbcType="BIGINT" property="praise" />
+    <result column="poor" jdbcType="BIGINT" property="poor" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from theme
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.study.generatorMybatis.entity.Theme">
+    insert into theme (id, tribe_id, user_id, 
+      titile, praise, poor, 
+      content)
+    values (#{id,jdbcType=BIGINT}, #{tribeId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{titile,jdbcType=VARCHAR}, #{praise,jdbcType=BIGINT}, #{poor,jdbcType=BIGINT}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.study.generatorMybatis.entity.Theme">
+    update theme
+    set tribe_id = #{tribeId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      titile = #{titile,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=BIGINT},
+      poor = #{poor,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, tribe_id, user_id, titile, praise, poor, content
+    from theme
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, tribe_id, user_id, titile, praise, poor, content
+    from theme
+  </select>
+</mapper>

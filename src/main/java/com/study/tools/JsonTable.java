@@ -17,27 +17,12 @@ public class JsonTable {
     public static void main(String[] args) {
         //Scanner scanner = new Scanner(System.in);
         String str = "{\n" +
-                "            \"categoryName\": \"\",\n" +
-                "            \"goodsCategoryName\": \"美容个护-洗护\",\n" +
-                "            \"goodsCode\": \"1021\",\n" +
-                "            \"goodsImages\": \"http://img.xiaoxiangyoupin.com/image/8527b226-e259-4be4-a3bc-bb74de55a36c.png\",\n" +
-                "            \"goodsName\": \"【博朗】欧乐3D蓝牙智能电动牙刷\",\n" +
-                "            \"goodsOrder\": \"\",\n" +
-                "            \"goodsType\": 2,\n" +
-                "            \"id\": 352,\n" +
-                "            \"inventory\": \"\",\n" +
-                "            \"originalPrice\": 139900,\n" +
-                "            \"plusNewConfig\": \"\",\n" +
-                "            \"supplyPrice\": \"\",\n" +
-                "            \"updateTime\": \"2021-08-23 18:43:39\",\n" +
-                "            \"updateUser\": \"admin\",\n" +
-                "            \"vipShopConfig\": {\n" +
-                "                \"discountPrice\": 1279200,\n" +
-                "                \"goodsDiscount\": 8.00000000,\n" +
-                "                \"status\": true\n" +
-                "            },\n" +
-                "            \"xxypOriginalPrice\": 249900\n" +
-                "        }";
+                "                \"userId\": 657366401,\n" +
+                "                \"avatar\": \"https://cdn.xiaoxiangyoupin.com/image/750x750_1122736622484905984.png\",\n" +
+                "                \"userName\": \"大卫-汤普森\",\n" +
+                "                \"launchCount\": 0,\n" +
+                "                \"awardCoins\": 10\n" +
+                "            }";
         StringBuilder builder = new StringBuilder();
         builder.append("| 名称                  | 类型    | 描述                      |").append("\r\n");
         builder.append("| :-------------------- | :------ | :------------------------ |").append("\r\n");

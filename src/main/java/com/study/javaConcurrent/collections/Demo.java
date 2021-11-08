@@ -2,32 +2,42 @@ package com.study.javaConcurrent.collections;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Function;
 
 /**
  * 集合不安全现象演示
  */
 public class Demo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         CopyOnWriteArrayList<Integer> list1 = new CopyOnWriteArrayList<>();
         list1.add(1);
-
         HashMap<String, String> map = new HashMap<>();
-        map.put("1","2");
-        ArrayList list = new ArrayList();
-        for (int i = 0; i < 3; i++) {
+        System.out.println(map.computeIfAbsent("2", x->x+1));
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+       /* ArrayList list = new ArrayList();
+        for (int i = 0; i < 10; i++) {
 
-                    list.add(1);
-                    System.out.println(list);
+            int a = i;
+            new Thread(() -> {
+
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+
+                list.add(a);
+
+
+                System.out.println(list);
+
             }).start();
         }
-        System.out.println("11" + list);
+
+        Thread.sleep(10000);
+        System.out.println("11" + list);*/
 
     }
 }
