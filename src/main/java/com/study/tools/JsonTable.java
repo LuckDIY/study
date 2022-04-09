@@ -17,12 +17,16 @@ public class JsonTable {
     public static void main(String[] args) {
         //Scanner scanner = new Scanner(System.in);
         String str = "{\n" +
-                "                \"userId\": 657366401,\n" +
-                "                \"avatar\": \"https://cdn.xiaoxiangyoupin.com/image/750x750_1122736622484905984.png\",\n" +
-                "                \"userName\": \"大卫-汤普森\",\n" +
-                "                \"launchCount\": 0,\n" +
-                "                \"awardCoins\": 10\n" +
-                "            }";
+                "\t\t\t\"activityInventory\": -1,\n" +
+                "\t\t\t\"defaultStatus\": 1,\n" +
+                "\t\t\t\"discountPrice\": 525,\n" +
+                "\t\t\t\"discountType\": 1,\n" +
+                "\t\t\t\"goodsDiscount\": 0.75000000,\n" +
+                "\t\t\t\"goodsOrder\": 4,\n" +
+                "\t\t\t\"id\": 258217,\n" +
+                "\t\t\t\"soldCount\": -1,\n" +
+                "\t\t\t\"status\": true\n" +
+                "\t\t}";
         StringBuilder builder = new StringBuilder();
         builder.append("| 名称                  | 类型    | 描述                      |").append("\r\n");
         builder.append("| :-------------------- | :------ | :------------------------ |").append("\r\n");

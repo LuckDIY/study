@@ -12,9 +12,155 @@ import org.springframework.stereotype.Service;
  **/
 public class DpBasis {
 
+    public static void main(String[] args) {
+        int[] weight = new int[]{2,2,4,6,4};
+
+        System.out.println(new DpBasis().knapsack3(weight,5,13));
+    }
+
+    /**
+     * 背包问题， 石头不可分割，背包容量x，最大能放进多少
+     * 1。回溯解法
+     * @param weight 每个石头
+     * @param n n个石头
+     * @param w 背包可承载重量
+     * @return
+     */
+    public int knapsack1(int[] weight, int n, int w){
+
+        int max = 0;
+
+        int i = 0;
+        //回溯，要么装，要么不装
+
+        return zhuang(weight,n,i,w,0,max);
+
+    }
+
+    /**
+     * 装石头
+     * @param weight 石头
+     * @param n 总石头数
+     * @param i 该放第几个石头
+     * @param w 背包最大承重
+     * @param cw 当前重量
+     * @param max 当前最大重量
+     */
+    private Integer zhuang(int[] weight,int n, int i, int w, int cw,int max) {
+
+        if(i==n || cw==w){
+            //谁大返回谁
+            return Math.max(cw,max);
+        }
+
+        //不放
+        max = zhuang(weight,n,i+1,w,cw,max);
+
+        //放
+
+        if(cw+weight[i]<=w){
+            //代表可以放
+
+            max = zhuang(weight, n, i + 1, w, cw + weight[i], max);
+        }
+
+        return max;
+
+    }
 
 
     /**
+     * 背包问题， 石头不可分割，背包容量x，最大能放进多少
+     * 2。动态规划写法
+     * @param weight 每个石头
+     * @param n n个石头
+     * @param w 背包可承载重量
+     * @return
+     */
+    public int knapsack2(int[] weight, int n, int w){
+
+        //创建二维数组,初始值为false  1.第几次放石头  2。放完石头后背包的重量
+        boolean[][] dp = new boolean[n][w+1];
+
+        //初始值赋值,第一次放入
+        dp[0][0] = true;
+
+        if(weight[0]<=w){
+            dp[0][weight[0]] = true;
+        }
+
+        for (int i = 1; i < n; i++) {
+
+            //继续放与不放
+            for (int j = 0; j <= w; j++) {
+                if (dp[i-1][j]) {
+                    //不放
+                    dp[i][j] = true;
+
+                    //放
+                    if (j+weight[i]<=w) {
+                        dp[i][j+weight[i]] = true;
+                    }
+                }
+            }
+        }
+
+        for (int i = w; i >= 0; i--) {
+            if (dp[n-1][i]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
+    /**
+     * 背包问题， 石头不可分割，背包容量x，最大能放进多少
+     * 3。动态规划空间复杂度优化
+     * 由于只有最后一行有用，所以二维数组改为一位数组
+     * @param weight 每个石头
+     * @param n n个石头
+     * @param w 背包可承载重量
+     * @return
+     */
+    public int knapsack3(int[] weight, int n, int w){
+
+        //由于只有最后一行有用，所以二维数组改为一位数组
+        boolean[] dp = new boolean[w+1];
+
+        //初始值赋值,第一次放入
+        dp[0] = true;
+
+        if(weight[0]<=w){
+            dp[weight[0]] = true;
+        }
+
+        for (int i = 1; i < n; i++) {
+
+            //倒循化 避免重复赋值
+            for (int j = w-weight[i] ; j >= 0; j--) {
+
+                //不放就是原来的值，无需改变
+                //放
+                if(dp[j]){
+                    dp[j+weight[i]] = true;
+                }
+            }
+        }
+
+
+        for (int i = w; i >= 0; i--) {
+            if (dp[i]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
+    /**
+     * 背包问题， 石头不可分割，背包容量x，最大能放进多少
+     *
      * 动态规划解法
      * dp[i][j] i第几次抉择放与不放(n)   j 抉择后背包的当前重量(w)
      * @param weight 物品重量
@@ -56,7 +202,7 @@ public class DpBasis {
      * @param w
      * @return
      */
-    public int knapsack2(int[] weight, int n, int w) {
+    public int knapsack0(int[] weight, int n, int w) {
         boolean[] states = new boolean[w+1]; // 默认值false
         states[0] = true;  // 第一行的数据要特殊处理，可以利用哨兵优化
         if (weight[0] <= w) {

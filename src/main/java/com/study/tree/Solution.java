@@ -343,11 +343,61 @@ public class Solution {
         return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
     }
 
+    /**
+     * 二叉树的最大深度
+     * 广度优先法
+     * @param root
+     * @return
+     */
+    public int maxDepth2(TreeNode root) {
 
-    public static void main(String[] args) {
+        if(root==null){
+            return 0;
+        }
+
+        //队列
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int count = 0;
+        while(!queue.isEmpty()){
+            count++;
+
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode poll = queue.poll();
+
+                if(poll.left!=null){
+                    queue.add(poll.left);
+
+                }
+
+                if(poll.right!=null){
+                    queue.add(poll.right);
+                }
+            }
+
+        }
+
+        return count;
+
+    }
+
+
+    /*public static void main(String[] args) {
         int[] nums = new int[]{-10,-3,0,5,9};
         TreeNode treeNode = new Solution().sortedArrayToBST(nums);
-    }
+
+
+        LinkedList<Integer> newQueue = new LinkedList<>();
+
+        newQueue.add(1);
+        newQueue.add(2);
+        newQueue.add(3);
+
+        System.out.println(newQueue.pollFirst());
+        System.out.println(newQueue.pollLast());
+
+    }*/
 
     /**
      *
@@ -378,6 +428,16 @@ public class Solution {
 
         return root;
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
