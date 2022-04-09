@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 /**
  * 数据库配置
  */
+//@ConditionalOnClass(com.study.config.ConditionalCreateDataSource.class)
 @Slf4j
 @Configuration
 @MapperScan(basePackages = DataSourceConfig.MAPPER_PACKAGE, sqlSessionFactoryRef = DataSourceConfig.SESSION_FACTORY)
@@ -56,10 +58,10 @@ public class DataSourceConfig {
      */
     @Primary
     @Bean(name = SESSION_FACTORY)
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         log.info("配置SqlSessionFactory开始");
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(druidDataSource());
+        sessionFactory.setDataSource(dataSource);
         return sessionFactory.getObject();
     }
 
