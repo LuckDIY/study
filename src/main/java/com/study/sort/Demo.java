@@ -12,9 +12,12 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
-        int[] arr = new int[]{4, 3, 5, 6, 2, 7, 1, 1, 2, 2};
-        new Demo().fastSort(arr, 0, arr.length - 1);
+        //int[] arr = new int[]{4, 3, 5, 6, 2, 7, 1, 1, 2, 2};
+        int[] arr = new int[]{-74,48,-20,2,10,-84,-5,-9,11,-24,-91,2,-71,64,63,80,28,-30,-58,-11,-44,-87,-22,54,-74,-10,-55,-28,-46,29,10,50,-72,34,26,25,8,51,13,30,35,-8,50,65,-6,16,-2,21,-78,35,-13,14,23,-3,26,-90,86,25,-56,91,-13,92,-25,37,57,-20,-69,98,95,45,47,29,86,-28,73,-44,-46,65,-84,-96,-24,-12,72,-68,93,57,92,52,-45,-2,85,-63,56,55,12,-85,77,-39};
+        //new Demo().fastSort(arr, 0, arr.length - 1);
 
+        new Demo().heapSort(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
 
@@ -177,5 +180,69 @@ public class Demo {
         arr[r] = mid;
 
         return r;
+    }
+
+
+    /**
+     * 堆排序练习
+     * @param nums
+     */
+    public void heapSort(int[] nums){
+
+        //构建大顶堆
+        buildMaxHeap(nums,0,nums.length);
+
+        for (int i = nums.length-1;i>=0;i--){
+            //第一个已经是最大了,放到尾部，不再参与构建
+            swap(nums,0,i);
+
+            //顶部元素下沉,最大值就是他以前的位置
+            nodeSink(nums,0,i);
+        }
+
+    }
+
+    //建立大顶堆，通过数组构建
+    //最后一个非叶子节点下标: length/2-1
+    //对于完全二叉树中的第 i 个数，它的左子节点下标：left = 2i + 1
+    public void buildMaxHeap(int[] nums,int start,int end) {
+
+        //最后一个非叶子节点下标: length/2-1
+        //从最后一个往前构建大顶堆
+        for (int i = end / 2 - 1; i >=start; i--) {
+            nodeSink(nums,i, end);
+        }
+    }
+
+    //节点下沉
+    private void nodeSink(int[] nums, int current, int end) {
+
+        //记录最大下标，便于交换
+        int maxIndex = current;
+
+        int leftIndex = 2* current +1;
+        //右不一定存在，有可能越界
+        int rightIndex = leftIndex+1;
+
+        if(leftIndex< end && nums[leftIndex] > nums[maxIndex]){
+            maxIndex = leftIndex;
+        }
+
+        if(rightIndex< end && nums[rightIndex] > nums[maxIndex]){
+            maxIndex = rightIndex;
+        }
+
+        //如果最大值不是父亲结点，则交换位置
+        if(maxIndex!= current){
+            swap(nums, current,maxIndex);
+            //更换位置后再比较当前元素是否可以继续下沉
+            nodeSink(nums,maxIndex,end);
+        }
+    }
+
+    public void swap(int[] nums,int i,int maxIndex){
+        int temp = nums[i];
+        nums[i] = nums[maxIndex];
+        nums[maxIndex] = temp;
     }
 }
