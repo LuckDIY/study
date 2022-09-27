@@ -151,4 +151,35 @@ public class Demo {
         }
         return dp[coins.length][amount];
     }
+
+
+    /**
+     * 打卡 leetcode
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean CheckPermutation(String s1, String s2) {
+        if(s1.length()!=s2.length()){
+            return false;
+        }
+
+        int[] arr = new int[128];
+
+
+        for (int i = 0; i < s1.length(); i++) {
+            arr[s1.charAt(i)]++;
+        }
+
+        for (int i = 0; i < s2.length(); i++) {
+            arr[s2.charAt(i)]--;
+
+            //小于0 肯定不匹配
+            if(arr[s2.charAt(i)]<0){
+                return false;
+            }
+        }
+        //因为数量相同，所以没有减为负数就代表成功
+        return true;
+    }
 }
